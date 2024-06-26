@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <style>
+     body {
+    font-family: sans-serif;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    padding: 1rem;
+    position: relative; /* Allow error message positioning */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    position: absolute; /* Position error message below the input */
+    bottom: -20px; /* Adjust spacing as needed */
+    left: 0;
+}
+.container{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+
+
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myForm">
+            <h2>Contact Form</h2>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required>
+                <span class="error-message"> This field is required </span></div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+                <span class="error-message">A valid email address is required</span> </div>
+            <div class="form-group">
+                <label for="website">Website (Optional):</label>
+                <input type="url" name="website" id="website">
+                <span class="error-message"> A valid url is required</span> </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea name="message" id="message" required></textarea>
+                <span class="error-message"> This field is required</span> </div>
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+  
+    <script>
+const form = document.getElementById('myForm');
+const errorMessages = document.querySelectorAll('.error-message'); // Get all error message elements
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevent default form submission
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const website = document.getElementById('website').value;
+  const message = document.getElementById('message').value;
+
+  let isValid = true; // Flag to track validation
+
+  // Clear any previous error messages
+  errorMessages.forEach(message => message.textContent = '');
+
+  // Form validation with improved error messages
+  if (name === '') {
+    document.getElementById('name').nextElementSibling.textContent = 'Please enter your name.';
+    isValid = false;
+  }
+
+  if (email === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('email').nextElementSibling.textContent = 'Please enter a valid email address.';
+    isValid = false;
+  }
+
+  if (website !== '' && !/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)*$/.test(website)) {
+    document.getElementById('website').nextElementSibling.textContent = 'Please enter a valid website URL (optional).';
+    isValid = false;
+  }
+
+  if (message === '') {
+    document.getElementById('message').nextElementSibling.textContent = 'Please enter your message.';
+    isValid = false;
+  }
+
+  // If all fields are valid, submit the form (replace with your form submission logic)
+  if (isValid) {
+    console.log('Form submitted successfully!');
+    // Your form submission logic here (e.g., send data to server using AJAX)
+  }
+});
+
+
+    </script>
+</body>
+</html>

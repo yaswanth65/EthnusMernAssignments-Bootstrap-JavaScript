@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(77, 123, 86);
+            height: 100vh;
+            display: flex;
+          
+            align-items: center;
+            flex-direction: column;
+            font-size: 20px;
+            font-weight: 900;
+        }
+       
+        input{
+            width: 200px;
+            height: 30px;
+        }
+        #answer{
+            width: 200px;
+            height: 30px;
+        }
+        .input{
+            display: flex;
+            justify-content: center;
+            margin-top: 20vh;
+           
+         
+        }
+        #Char{
+            margin-left: 10px;
+        }
+        label{
+            font-weight: 900;
+            font-size: large
+        }
+        
+    </style>
+    <body>
+        <h1>Alphabetical Charecters</h1>
+        <div class="input">
+            <label for="Char"> your Charecters:</label>
+            <input type="String" id="Char">
+        </div>
+        <h1 id="Reverse"></h1>
+
+      <script>
+        var Char = document.getElementById("Char");
+        let reverse = document.getElementById("Reverse");
+        
+         Char.addEventListener("input",() => {
+             let order= Char.value;
+             let changed=order.split("").sort().join("");
+             
+            reverse.innerText = "Answer is :"+changed;
+             }  );
+      </script>  
+    
+</body>
+</html>

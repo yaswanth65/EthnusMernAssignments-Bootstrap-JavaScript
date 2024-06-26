@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+    background: linear-gradient(to bottom, #fff9c4, #f8bbd0);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #0000FF;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.error {
+    color: red;
+    display: none;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #0000FF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <form id="registrationForm">
+            <h2>Registration Form</h2>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName">
+                <span class="error" id="firstNameError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName">
+                <span class="error" id="lastNameError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+                <span class="error" id="emailError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <span class="error" id="passwordError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Re-enter Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword">
+                <span class="error" id="confirmPasswordError">POOR OR MISMATCH</span>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <input type="radio" id="male" name="gender" value="Male" checked> Male
+                <input type="radio" id="female" name="gender" value="Female"> Female
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age">
+                <span class="error" id="ageError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber">
+                <span class="error" id="phoneNumberError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address"></textarea>
+                <span class="error" id="addressError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state">
+                <span class="error" id="stateError">POOR</span>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="">Choose your country</option>
+                    <!-- Add more country options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Languages known</label>
+                <input type="checkbox" name="languages" value="English"> English
+                <input type="checkbox" name="languages" value="Kannada"> Kannada
+                <input type="checkbox" name="languages" value="Hindi"> Hindi
+                <input type="checkbox" name="languages" value="Telugu"> Telugu
+            </div>
+           
+              <input type="checkbox" id="declaration" name="declaration"> Hereby I declare all the given details are true
+                
+            
+            <button type="submit">REGISTER</button>
+        </form>
+        <a href="https://ethnus.com">Log in to Ethnus website</a>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    let isValid = true;
+    
+    const fields = [
+        { id: 'firstName', name: 'First Name' },
+        { id: 'lastName', name: 'Last Name' },
+        { id: 'email', name: 'Email', pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+        { id: 'password', name: 'Password' },
+        { id: 'confirmPassword', name: 'Re-enter Password', match: 'password' },
+        { id: 'age', name: 'Age', type: 'number' },
+        { id: 'phoneNumber', name: 'Phone Number' },
+        { id: 'address', name: 'Address' },
+        { id: 'state', name: 'State' }
+    ];
+    
+    fields.forEach(field => {
+        const input = document.getElementById(field.id);
+        const error = document.getElementById(`${field.id}Error`);
+        
+        if (!input.value.trim() || (field.pattern && !field.pattern.test(input.value)) || (field.type === 'number' && isNaN(input.value)) || (field.match && input.value !== document.getElementById(field.match).value)) {
+            error.style.display = 'inline';
+            isValid = false;
+        } else {
+            error.style.display = 'none';
+        }
+    });
+    
+    if (isValid) {
+        alert('Registration successful!');
+    }
+});
+
+    </script>
+</body>
+</html>
